@@ -7,11 +7,11 @@ function saveAsCSV() {
 
 	var fp = Components.classes["@mozilla.org/filepicker;1"]
 	           .createInstance(nsIFilePicker);
-	fp.init(window, "Save CVS as", nsIFilePicker.modeSave);
+	fp.init(window, "Save CSV as", nsIFilePicker.modeSave);
 	fp.appendFilters(nsIFilePicker.filterAll | nsIFilePicker.filterText);
 	fp.open(function (rv) {
 		if (rv == nsIFilePicker.returnOK || rv == nsIFilePicker.returnReplace) {
-    			var result = convertArrayOfObjectsToCSV({data:extractSenders(),columnDelimiter:'\t'});
+    			var result = convertArrayOfObjectsToCSV({data:extractData(),columnDelimiter:'\t'});
 		
 			// write file 
 			//
@@ -39,7 +39,7 @@ function saveAsCSV() {
 	});
 }
 
-function extractSenders() {
+function extractData() {
 	var msgHeaderParser = Components.classes["@mozilla.org/messenger/headerparser;1"]
                       .createInstance(Components.interfaces.nsIMsgHeaderParser);
 
